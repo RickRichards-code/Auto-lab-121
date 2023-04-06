@@ -27,7 +27,20 @@ namespace Auto
             this.a[2,2] = "tesla";
             this.a[2,3] = "volvo";
         }
-        // b) Ver si alguno de los automóviles es “Toyota” en el objeto Importadora
+
+        public void mostrar()
+        {
+            Console.WriteLine("---- importadora ----");
+            for (int i = 0; i < nroAutos; i++)
+            {
+                Console.WriteLine(" -- auto -- ");
+                Console.WriteLine("placa: "+a[0,i]);
+                Console.WriteLine("pais: "+a[1,i]);
+                Console.WriteLine("marca: "+a[2,i]);
+            }
+        }
+        // SOBRECARGAR UN METODO PARA:
+        // SOBRECARGA a) Ver si alguno de los automóviles es “Toyota” en el objeto Importadora
         public String verificar(String marcaX)
         {
             Console.WriteLine("---- b) Ver si alguno de los automóviles es “Toyota” en el objeto Importadora ----");
@@ -40,8 +53,8 @@ namespace Auto
             }
             return "no hay esa marca en la importadora";
         }
-        // c) Verificar si la placa del objeto automóvil existe en el Objeto Importadora.
-        public String verificarPlaca(AutoMovil a)
+        // SOBRECARGA b) Verificar si la placa del objeto automóvil existe en el Objeto Importadora.
+        public String verificar(AutoMovil a)
         {
             Console.WriteLine("---- c) Verificar si la placa del objeto automóvil existe en el Objeto Importadora. ----");
             for (int i = 0; i < nroAutos; i++)
@@ -51,17 +64,34 @@ namespace Auto
             }
             return "no exite";
         }
-        // d) Cuantos automoviles tienen procedencia del país X
-        public void paisProcedencia(String paisX)   
+        // SOBRECARGAR OPERADORES PARA:
+        // SOBRECARGA OPERADOR a.1) Cuantos automoviles tienen procedencia del país X
+        public static int operator /(Importadora h, String paisX)   
         {
             Console.WriteLine("---- d) Cuantos automoviles tienen procedencia del país X ----");
             int c = 0;
-            for (int i = 0; i < nroAutos; i++)
+            for (int i = 0; i < h.nroAutos; i++)
             {
-                if (this.a[1, i].Equals(paisX))
+                if (h.a[1, i].Equals(paisX))
                     c++;
             }
-            Console.WriteLine("los vehiculos del pais: "+paisX+" son: "+c);
+            Console.WriteLine("los vehiculos del pais: "+paisX+" son: ");
+            return c;
+        }
+        // SOBRECARGA b.1) Agregar k automoviles al Objeto importadora
+        public static String operator -(Importadora h, int k)
+        {
+            int f = 0;
+            for (int i = 0; i < k+1; i++)
+            {
+                f = h.nroAutos + i; 
+                h.a[0,f] = "BAFA3-314";
+                h.a[1,f] = "bolivia";
+                h.a[2,f] = "tesla";
+            }
+            h.nroAutos = f;
+            h.mostrar();
+            return ("numero de autos aumentados: " + k);
         }
         
     }

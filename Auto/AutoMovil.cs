@@ -17,6 +17,13 @@ namespace Auto
             this.anio = anio;
         }
 
+        public void mostrar()
+        {
+            Console.WriteLine("---- AutoMovil----");
+            Console.WriteLine("nombre:");
+        }
+        
+
         public string Nombre => nombre;
 
         public string Modelo => modelo;
